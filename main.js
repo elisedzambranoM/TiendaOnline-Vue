@@ -10,8 +10,14 @@ const app = new Vue({
     premiumUser: false,
   },
   methods: {
-    addToShoppingCart() {
-      this.cart.push();
+    addToShoppingCart(product) {
+      this.cart.push(product);
+    },
+    removeToShoppingCart(product) {
+      if (this.cart.length > -1) {
+        let index = this.cart.indexOf(product);
+        this.cart.splice(index, 1);
+      }
     },
   },
   computed: {

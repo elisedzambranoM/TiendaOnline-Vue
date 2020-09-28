@@ -61,7 +61,17 @@ Vue.component("product-component", {
       this.selectedFormat.stock -= 1;
       this.$emit("add-to-cart", this.selectedFormat);
     },
-    removeFromCart() {},
+    removeFromCart() {
+      this.selectedFormat.stock++;
+      this.$emit("remove-to-cart", this.selectedFormat);
+      /*let variantCart = this.cart.filter(
+        (variant) => variant == this.selectedFormat
+      );
+
+      if (variantCart.length > 0) {
+        this.selectedFormat.stock += 1;
+      }*/
+    },
   },
   template: "#product-template",
 });

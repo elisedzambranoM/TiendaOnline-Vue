@@ -25,7 +25,11 @@
       </nav>
       <div class="container mt-5">
         <h1>{{title}}</h1>
-        <product-component @add-to-cart="addToShoppingCart"></product-component>
+        <product-component
+          :cart="cart"
+          @add-to-cart="addToShoppingCart"
+          @remove-to-cart="removeToShoppingCart"
+        ></product-component>
       </div>
       <div
         class="modal"
@@ -91,7 +95,7 @@
             </select>
           </div>
           <button :disabled="!hasStock" @click="addToCart"   class="btn btn-primary">Agregar al carro</button>
-          <button class="btn btn-primary">Quitar del carro</button>
+          <button class="btn btn-primary" @click="removeFromCart">Quitar del carro</button>
           </div>
 
 
