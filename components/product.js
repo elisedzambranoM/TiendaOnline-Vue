@@ -22,7 +22,7 @@ Vue.component("product-component", {
           sku: "2234",
           type: "Impreso",
           img: "./assets/printed-book.jpg",
-          stock: 0,
+          stock: 20,
           default: false,
         },
         {
@@ -68,17 +68,13 @@ Vue.component("product-component", {
       this.$emit("add-to-cart", this.selectedFormat);
     },
     removeFromCart() {
-      if (this.cart.length > 0) {
-        this.selectedFormat.stock += 1;
-      }
-
-      this.$emit("remove-to-cart", this.selectedFormat);
-      /*let variantCart = this.cart.filter(
+      let variantCart = this.cart.filter(
         (variant) => variant == this.selectedFormat
       );
-
-      
-      }*/
+      if (variantCart.length > 0) {
+        this.selectedFormat.stock += 1;
+        this.$emit("remove-to-cart", this.selectedFormat);
+      }
     },
   },
   template: "#product-template",
