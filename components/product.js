@@ -5,6 +5,10 @@ Vue.component("product-component", {
       //required: true,
       default: false,
     },
+    cart: {
+      type: Array,
+      required: true,
+    },
   },
   template: "#product-template",
   data() {
@@ -19,13 +23,14 @@ Vue.component("product-component", {
           type: "Impreso",
           img: "./assets/printed-book.jpg",
           stock: 0,
-          default: true,
+          default: false,
         },
         {
           sku: "2235",
           type: "pdf",
           img: "./assets/pdf-book.jpg",
           stock: 100,
+          default: true,
         },
       ],
     };
@@ -59,17 +64,20 @@ Vue.component("product-component", {
   methods: {
     addToCart() {
       this.selectedFormat.stock -= 1;
+
       this.$emit("add-to-cart", this.selectedFormat);
     },
     removeFromCart() {
-      this.selectedFormat.stock++;
+      if (this.cart.length > 0) {
+        this.selectedFormat.stock += 1;
+      }
+
       this.$emit("remove-to-cart", this.selectedFormat);
       /*let variantCart = this.cart.filter(
         (variant) => variant == this.selectedFormat
       );
 
-      if (variantCart.length > 0) {
-        this.selectedFormat.stock += 1;
+      
       }*/
     },
   },
