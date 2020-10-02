@@ -29,6 +29,7 @@
           :cart="cart"
           @add-to-cart="addToShoppingCart"
           @remove-to-cart="removeToShoppingCart"
+          ref="product"
         ></product-component>
       </div>
       <div
@@ -40,7 +41,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+              <h5 class="modal-title">Carrito de compras</h5>
               <button
                 @click="displayCart=false"
                 type="button"
@@ -52,19 +53,28 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Modal body text goes here.</p>
+              <ul>
+                <li v-for="(item, key, index) in cartCheck">
+                  {{ item }} - {{ key }}
+                </li>
+              </ul>
+              <p></p>
             </div>
             <div class="modal-footer">
               <button
-                @click="displayCart=false"
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
+                @click="emptyCart"
               >
-                Close
+                Vaciar carrito
               </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="displayCart=false"
+              >
+                Seguir comprando
               </button>
             </div>
           </div>

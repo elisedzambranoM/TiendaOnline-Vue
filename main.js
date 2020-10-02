@@ -19,6 +19,10 @@ const app = new Vue({
         this.cart.splice(index, 1);
       }
     },
+    emptyCart() {
+      this.$refs.product.restoreStock();
+      this.cart = [];
+    },
   },
   computed: {
     modalStyle() {
@@ -27,6 +31,14 @@ const app = new Vue({
       } else {
         return {};
       }
+    },
+    cartCheck() {
+      var cartProducts = this.cart.map((product) => product.type);
+      result = cartProducts.reduce(
+        (a, c) => ((a[c] = (a[c] || 0) + 1), a),
+        Object.create(null)
+      );
+      return result;
     },
   },
 });

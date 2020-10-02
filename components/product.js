@@ -56,10 +56,15 @@ Vue.component("product-component", {
         return false;
       }
     },
+    beforeCreate() {
+      console.log(`estamos en el beforeCreate ${this.selectedFormat}`);
+    },
   },
   created() {
+    console.log(`estamos en el beforeCreate ${this.selectedFormat}`);
     var defaultFormat = this.formats.find((format) => format.default == true);
     this.selectedFormat = defaultFormat;
+    console.log(`estamos en el beforeCreate ${this.selectedFormat.type}`);
   },
   methods: {
     addToCart() {
@@ -75,6 +80,15 @@ Vue.component("product-component", {
         this.selectedFormat.stock += 1;
         this.$emit("remove-to-cart", this.selectedFormat);
       }
+    },
+    restoreStock() {
+      console.log("I got you");
+      this.cart.forEach((product) => {
+        var returnedProduct = this.formats.find(
+          (format) => format.type == product.type
+        );
+        returnedProduct.stock += 1;
+      });
     },
   },
   template: "#product-template",
